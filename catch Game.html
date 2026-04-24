@@ -175,16 +175,16 @@ button:hover{
 </div>
 
 <div id="giftCard">
-  <div class="logoG">GLOSSIER</div>
+  <div class="logoG">Lumivella</div>
   <h2>Game Gift Card </h2>
   <p>Send gift card to our offices to claim any product you like!</p>
 </div>
 
 <script>
 const products = [
-  {img:"Hydrating Serum.jpg", points:2},
-  {img:"Gentle Cleanser.jpg", points:1},
-  {img:"Revitalizing Cream.jpg", points:3},
+  {img:"hydrating serum.jpg", points:2},
+  {img:"gentle Cleanser.jpg", points:1},
+  {img:"revitalizing Cream.jpg", points:3},
   {img:"oh4.jpg", points:2}
 ];
 
@@ -313,7 +313,7 @@ function downloadGiftCard(){
   html2canvas(card).then(canvas=>{
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = "Lumivella-Gift-Card.png";
+    link.download = "LumivellaGiftCard.png";
     link.click();
     card.style.display = "none";
   });
