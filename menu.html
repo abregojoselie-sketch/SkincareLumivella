@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumivella — Menu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================
+   BASE
+========================= */
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #fffaf7;
+  color: #2b2b2b;
+  overflow-x: hidden;
+  cursor: url("cloud-cursor.png"), auto;
+}
+
+/* sparkles */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(#f7c9d8 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.25;
+  animation: floatBg 12s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatBg {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-40px); }
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  background: #ffe4ec;
+  border-bottom: 1px solid #e8ded6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  color: #6a4e42;
+}
+
+/* =========================
+   GRID
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+.card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e8ded6;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.content {
+  padding: 14px;
+}
+
+.price {
+  color: #d97aa6;
+  font-weight: bold;
+}
+
+/* buttons row */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  background: #f4a8bc;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #e48ca6;
+}
+
+/* wishlist */
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* =========================
+   SIDE CART
+========================= */
+#cartPanel {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: -10px 0 25px rgba(0,0,0,0.15);
+  padding: 20px;
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+#cartPanel.open {
+  right: 0;
+}
+
+#cartToggle {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background: #f4a8bc;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* =========================
+   CART ITEMS
+========================= */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+/* =========================
+   MASCOT CLOUD
+========================= */
+#mascot {
+  position: fixed;
+  bottom: 20px;
+  right: 140px;
+  font-size: 55px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #f4a8bc);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* =========================
+   BOTTOM HOME BUTTON
+========================= */
+.bottom-home {
+  text-align: center;
+  margin: 40px 0 70px;
+}
+
+.home-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #f4a8bc;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(244,168,188,0.3);
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: #e48ca6;
+  transform: translateY(-3px);
+}
+
+/* responsive */
+@media(max-width:900px){
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  #mascot {
+    right: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1>Product Menu</h1>
+  </div>
+</header>
+
+<!-- CART BUTTON -->
+<button id="cartToggle" onclick="toggleCart()">🛒 Cart</button>
+
+<!-- SIDE CART -->
+<div id="cartPanel">
+  <h3>Your Cart</h3>
+  <div id="cart"></div>
+  <div class="total">Total: $<span id="total">0</span></div>
+</div>
+
+<main class="container">
+<div class="grid">
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="Hydrating Serum.jpg">
+    <div class="content">
+      <h3>Hydrating Serum</h3>
+      <p class="price">$38</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Hydrating Serum',38)">Add</button>
+        <button class="btn" onclick="openModal('Hydrating Serum')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="Revitalizing Cream.jpg">
+    <div class="content">
+      <h3>Revitalizing Cream</h3>
+      <p class="price">$42</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Revitalizing Cream',42)">Add</button>
+        <button class="btn" onclick="openModal('Revitalizing Cream')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="Gentle Cleanser.jpg">
+    <div class="content">
+      <h3>Gentle Cleanser</h3>
+      <p class="price">$24</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Gentle Cleanser',24)">Add</button>
+        <button class="btn" onclick="openModal('Gentle Cleanser')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="vit c.jpg">
+    <div class="content">
+      <h3>Vitamin C Serum</h3>
+      <p class="price">$40</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Vitamin C Serum',40)">Add</button>
+        <button class="btn" onclick="openModal('Vitamin C Serum')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="eye cream.jpg">
+    <div class="content">
+      <h3>Night Repair Cream</h3>
+      <p class="price">$45</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Night Cream',45)">Add</button>
+        <button class="btn" onclick="openModal('Night Cream')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="face mist.jpg">
+    <div class="content">
+      <h3>Face Mist</h3>
+      <p class="price">$28</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Face Mist',28)">Add</button>
+        <button class="btn" onclick="openModal('Face Mist')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="SS.jpg">
+    <div class="content">
+      <h3>Sunscreen SPF50</h3>
+      <p class="price">$30</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Sunscreen',30)">Add</button>
+        <button class="btn" onclick="openModal('Sunscreen')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="scrub.jpg">
+    <div class="content">
+      <h3>Scrub</h3>
+      <p class="price">$26</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Scrub',26)">Add</button>
+        <button class="btn" onclick="openModal('Scrub')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="heart" onclick="toggleHeart(event)">🤍</div>
+    <img src="Lip balm.jpg">
+    <div class="content">
+      <h3>Lip Balm</h3>
+      <p class="price">$12</p>
+      <div class="actions">
+        <button class="btn" onclick="addToCart('Lip Balm',12)">Add</button>
+        <button class="btn" onclick="openModal('Lip Balm')">View</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-home">
+  <a href="index.html" class="home-btn">← Back to Home</a>
+</div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Product Info</h3>
+    <p>Focus on the hydration and protection of the skin for a maintenance of glowing nature.</p>
+    <button class="btn" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- MASCOT -->
+<div id="mascot">☁️</div>
+
+<!-- SOUND -->
+<audio id="bubbleSound">
+  <source src="bubble.mp3" type="audio/mp3">
+</audio>
+
+<script>
+let total = 0;
+
+function toggleCart(){
+  document.getElementById("cartPanel").classList.toggle("open");
+}
+
+function addToCart(name, price){
+  const cart = document.getElementById("cart");
+
+  const item = document.createElement("div");
+  item.className = "cart-item";
+  item.innerHTML = `<span>${name}</span><span>$${price}</span>`;
+  cart.appendChild(item);
+
+  total += price;
+  document.getElementById("total").innerText = total;
+
+  document.getElementById("bubbleSound").play();
+}
+
+function toggleHeart(e){
+  e.target.textContent = e.target.textContent === "🤍" ? "💖" : "🤍";
+}
+
+function openModal(){
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

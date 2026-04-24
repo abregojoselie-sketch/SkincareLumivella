@@ -1,0 +1,52 @@
+<Contact html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumivella — Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family: Inter, sans-serif; background:#fffaf7; color:#2b2b2b; }
+    header, footer { background:#f4f8ef; border-bottom:1px solid #e8ded6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    h1 { font-family:'Playfair Display', serif; color:#6a4e42; }
+    label { display:block; margin:10px 0 6px; font-weight:600; }
+    input, textarea {
+      width:100%; padding:12px; border:1px solid #e8ded6; border-radius:10px; background:#ffffff;
+    }
+    button {
+      margin-top:12px; padding:12px 18px; border:none; border-radius:10px;
+      background:#7cc0a3; color:#0f2a22; font-weight:700; cursor:pointer;
+    }
+    button:hover { background:#5aa486; }
+    a { color:#5aa486; text-decoration:none; font-weight:700; }
+    a:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html">← Back to Home</a>
+      <h1>Contact Us</h1>
+    </div>
+  </header>
+  <main class="container">
+    <p>Email us at <a href="mailto:hello@lumivella.com">hello@lumivella.com</a> or send a message below.</p>
+    <form aria-label="Contact form" action="#" method="post">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+
+      <button type="submit">Send message</button>
+    </form>
+  </main>
+  <footer>
+    <div class="container">© 2026 Lumivella Skincare</div>
+  </footer>
+</body>
+</html>

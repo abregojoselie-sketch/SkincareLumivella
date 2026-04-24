@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumivella — Video Library</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* =========================
+   ROOT COLORS
+========================= */
+:root {
+  --bg: #fffaf7;
+  --text: #2b2b2b;
+  --muted: #6a4e42;
+  --surface: #ffffff;
+  --border: #e8ded6;
+  --pink: #d98ca2;
+  --pink-hover: #c97a91;
+}
+
+/* =========================
+   BASE STYLES
+========================= */
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header,
+footer {
+  background: #fce7ec;
+  border-bottom: 1px solid var(--border);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1,
+h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--muted);
+}
+
+a {
+  color: var(--pink);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+a:hover {
+  color: var(--pink-hover);
+  text-decoration: underline;
+}
+
+/* =========================
+   VIDEO GRID
+========================= */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+/* =========================
+   VIDEO CARD
+========================= */
+.video-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.video-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.video-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <a href="index.html">← Back to Home</a>
+    <h1>Routines</h1>
+    <p>Explore tutorials, skincare education, and real routines.</p>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- BEGINNER -->
+  <h2>Beginner Tutorials</h2>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=U0svrc0TDQM" target="_blank">
+        <img src="https://img.youtube.com/vi/U0svrc0TDQM/hqdefault.jpg" alt="">
+      </a>
+      <div class="video-info">
+        <h3>Skincare Routine for Beginners</h3>
+        <p>A simple guide to start your skincare journey.</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=CXvG2CBJ3SE" target="_blank">
+        <img src="https://img.youtube.com/vi/CXvG2CBJ3SE/hqdefault.jpg" alt="">
+      </a>
+      <div class="video-info">
+        <h3>How to Layer Products</h3>
+        <p>Learn the correct order to apply skincare.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DAILY ROUTINES -->
+  <h2>Skincare Routines</h2>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=35dEtiWj9L0" target="_blank">
+        <img src="https://img.youtube.com/vi/35dEtiWj9L0/hqdefault.jpg" alt="">
+      </a>
+      <div class="video-info">
+        <h3>Morning Routine</h3>
+        <p>A fresh routine for healthy skin all day.</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=9RgvNtUTCg8" target="_blank">
+        <img src="https://img.youtube.com/vi/9RgvNtUTCg8/hqdefault.jpg" alt="">
+      </a>
+      <div class="video-info">
+        <h3>Night Routine</h3>
+        <p>A calming evening ritual for recovery.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GLOW -->
+  <h2 style="margin-top:40px;">Glowing Skin Routines</h2>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=VCWfg28LIj4" target="_blank">
+        <img src="https://img.youtube.com/vi/VCWfg28LIj4/hqdefault.jpg" alt="">
+      </a>
+      <div class="video-info">
+        <h3>Routine for Glowing Skin</h3>
+        <p>A glow-boosting routine for radiant skin.</p>
+      </div>
+    </div>
+
+    <!-- EXTRA BOX TO FILL SPACE -->
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=C_vVT-SLGAk" target="_blank">
+        <img src="https://img.youtube.com/vi/C_vVT-SLGAk/hqdefault.jpg" alt="Olivia Campaign ">
+      </a>
+      <div class="video-info">
+        <h3>You Look Good Campaign</h3>
+        <p>You Look Good with Olivia Rodrigo.</p>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    © 2026 Lumivella Skincare
+    Skin First, Makeup Second.
+  </div>
+</footer>
+
+</body>
+</html>

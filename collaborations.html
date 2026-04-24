@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumivella — Collaborations</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+:root {
+  --bg: #fffaf7;
+  --text: #2b2b2b;
+  --muted: #6a4e42;
+  --surface: #ffffff;
+  --border: #e8ded6;
+  --coral: #f8d4cc;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+p {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  line-height: 1.6;
+}
+
+.celebrity {
+  margin-bottom: 60px;
+}
+
+.celebrity h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.photo-card {
+  background: var(--surface);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.image-box {
+  position: relative;
+  height: 250px;
+  background: white;
+  transition: background 0.3s ease;
+}
+
+.image-box img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.main-image {
+  opacity: 1;
+}
+
+.hover-image {
+  opacity: 0;
+}
+
+.photo-card:hover .image-box {
+  background: var(--coral);
+}
+
+.photo-card:hover .main-image {
+  opacity: 0;
+}
+
+.photo-card:hover .hover-image {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Collaborations</h1>
+  <p>Fun fact: Olivia Rodrigo is the first-ever celebrity ambassador for Glossier, featuring the campaign "You Look Good."</p>
+
+  <!-- OLIVIA -->
+  <section class="celebrity">
+    <h2>Olivia Rodrigo</h2>
+    <div class="photo-grid">
+      <div class="photo-card"><div class="image-box">
+        <img src="or1.jpg" class="main-image">
+        <img src="oh1.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="or2.jpg" class="main-image">
+        <img src="oh2.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="or3.jpg" class="main-image">
+        <img src="oh3.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="or4.jpg" class="main-image">
+        <img src="oh4.jpg" class="hover-image">
+      </div></div>
+    </div>
+  </section>
+
+  <!-- SEPHORA -->
+  <section class="celebrity">
+    <h2>Sephora</h2>
+    <div class="photo-grid">
+      <div class="photo-card"><div class="image-box">
+        <img src="s1.jpg" class="main-image">
+        <img src="hs1.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="s2.jpg" class="main-image">
+        <img src="hs2.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="s3.jpg" class="main-image">
+        <img src="hs3.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="s4.jpg" class="main-image">
+        <img src="hs4.jpg" class="hover-image">
+      </div></div>
+    </div>
+  </section>
+
+  <!-- KATSEYE -->
+  <section class="celebrity">
+    <h2>Katseye</h2>
+    <div class="photo-grid">
+      <div class="photo-card"><div class="image-box">
+        <img src="kat1.jpg" class="main-image">
+        <img src="hkat1.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="kat2.jpg" class="main-image">
+        <img src="hkat2.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="kat3.jpg" class="main-image">
+        <img src="hkat3.jpg" class="hover-image">
+      </div></div>
+
+      <div class="photo-card"><div class="image-box">
+        <img src="kat4.jpg" class="main-image">
+        <img src="hkat4.jpg" class="hover-image">
+      </div></div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

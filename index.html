@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumivella Skincare</title>
+
+  <meta name="description" content="Lumivella is a skincare brand focused on gentle, effective formulas that enhance your natural glow." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* =========================
+   ROOT COLORS
+========================= */
+:root {
+  --bg: #fffaf7;
+  --text: #2b2b2b;
+  --muted: #6a4e42;
+  --accent: #7cc0a3;
+  --accent-dark: #459c7a;
+  --surface: #ffffff;
+  --border: #e8ded6;
+}
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 45px;
+  width: auto;
+}
+
+.brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--muted);
+}
+
+.brand span {
+  font-size: 0.8rem;
+  color: var(--accent-dark);
+}
+
+/* =========================
+   NAVIGATION (FIXED MOBILE SCROLL)
+========================= */
+nav {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+nav a:hover {
+  background: #f3f0ec;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  background:
+    linear-gradient(rgba(247, 233, 233, 0.7), rgba(248, 229, 218, 0.7)),
+    url("background.jpg") center/cover no-repeat;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 30px;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--muted);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section {
+  padding: 50px 20px;
+  background:
+    linear-gradient(rgba(247, 233, 233, 0.7), rgba(248, 229, 218, 0.7)),
+    url("background2.jpg") center/cover no-repeat;
+}
+
+.section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--muted);
+}
+
+/* =========================
+   CARDS
+========================= */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.product img {
+  height: 220px;
+  object-fit: contain;
+  padding: 10px;
+  background: white;
+}
+
+.product .content {
+  padding: 16px;
+  background: #fce7ec;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 24px 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 900px) {
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-3,
+  .products,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <img src="Glossier.jpg" class="logo" alt="Lumivella Logo">
+      <div>
+        <h1>Lumivella</h1>
+        <span>Skin First, Makeup Second.</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="Menu.html">Menu</a></li>
+        <li><a href="Routines.html">Routines</a></li>
+        <li><a href="Collaborations.html">Collaborations</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<main class="hero">
+  <div class="container hero-inner">
+    <div>
+      <h2>Radiance in every drop - gentle, effective skincare for real life.</h2>
+      <p>We make products inspired by the people who use them : you. </p>
+
+      <a class="btn btn-primary" href="menu.html">Shop now</a>
+      <a class="btn btn-primary" href="Catch Game.html">Play & Win</a>
+    </div>
+
+    <div class="card">
+      <h4>About us</h4>
+      <p>Clean formulas. Barrier-first care.</p>
+      <img src="Glossier Boston.jpg" alt="">
+    </div>
+  </div>
+</main>
+
+<!-- EXPLORE -->
+<section class="section">
+  <div class="container">
+    <h3>Explore Lumivella</h3>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <h4>Mission</h4>
+        <p>Why we exist and the values that guide every formula and decision.</p>
+        <a href="mission.html">Read our mission</a>
+      </div>
+
+      <div class="card">
+        <h4>Vision</h4>
+        <p>Where we’re headed—innovation, sustainability, and community care.</p>
+        <a href="vision.html">Discover our vision</a>
+      </div>
+
+      <div class="card">
+        <h4>Menu</h4>
+        <p>Serums, cleansers, creams—curated for glow, balance, and comfort.</p>
+        <a href="menu.html">Browse products</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- PRODUCTS -->
+<section class="section">
+  <div class="container">
+    <h3>Bestsellers</h3>
+
+    <div class="products">
+      <div class="product">
+        <img src="Hydrating Serum.jpg">
+        <div class="content">
+          <h4>Hydrating Serum</h4>
+          <a class="btn btn-primary" href="#">View</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="Revitalizing Cream.jpg">
+        <div class="content">
+          <h4>Revitalizing Cream</h4>
+          <a class="btn btn-primary" href="#">View</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="Gentle Cleanser.jpg">
+        <div class="content">
+          <h4>Gentle Cleanser</h4>
+          <a class="btn btn-primary" href="#">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-grid">
+
+    <div>
+      <strong>Lumivella</strong><br>
+      Skin First, Makeup Second.
+      <p>© 2026 Lumivella Skincare</p>
+    </div>
+
+    <div>
+      <strong>Company</strong><br>
+      <a href="mission.html">Mission</a><br>
+      <a href="vision.html">Vision</a><br>
+      <a href="jobs.html">Job Opportunities</a>
+    </div>
+
+    <div>
+      <strong>Visit</strong><br>
+      <a href="menu.html">Menu</a><br>
+      <a href="location.html">Location</a><br>
+      <a href="Contact.html">Contact Us</a>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

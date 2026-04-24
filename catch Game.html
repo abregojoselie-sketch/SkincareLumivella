@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumivella Catch & Collect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  text-align:center;
+  color:#6a4e42;
+  background:linear-gradient(135deg,#fce7ec,#fff1f5);
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  margin:20px 0 5px;
+}
+
+#score{
+  font-weight:700;
+  font-size:18px;
+}
+
+#gameArea{
+  width:90%;
+  max-width:700px;
+  height:500px;
+  margin:20px auto;
+  background:#fff;
+  border:2px solid #ead6dd;
+  border-radius:22px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+#cart{
+  width:95px;
+  height:42px;
+  background:#d98ca2;
+  border-radius:14px;
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.item{
+  width:65px;
+  height:65px;
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+#basket{
+  width:90%;
+  max-width:700px;
+  margin:10px auto;
+  background:white;
+  border:1px solid #ead6dd;
+  border-radius:14px;
+  padding:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.basket-item{
+  width:55px;
+  height:55px;
+  border-radius:10px;
+  border:1px solid #ead6dd;
+}
+
+.specialG{
+  font-family:'Pacifico',cursive;
+  font-size:34px;
+  color:#d98ca2;
+}
+
+.mysteryBox{
+  width:65px;
+  height:65px;
+  object-fit:contain;
+}
+
+#winMessage{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:22px 30px;
+  border-radius:18px;
+  font-size:22px;
+  font-weight:700;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+#controls{
+  display:none;
+  margin-top:15px;
+  gap:12px;
+  justify-content:center;
+}
+
+button{
+  padding:10px 18px;
+  border:none;
+  border-radius:12px;
+  background:#d98ca2;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#c87992;
+}
+
+/* Minimal gift card */
+#giftCard{
+  display:none;
+  width:500px;
+  padding:40px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#f9d7e2,#fceef3);
+  color:#6a4e42;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+
+#giftCard .logoG{
+  font-family:'Pacifico',cursive;
+  font-size:58px;
+  color:#c87992;
+}
+
+#giftCard h2{
+  margin:10px 0;
+  font-family:'Playfair Display',serif;
+}
+
+#giftCard p{
+  font-size:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Lumivella Catch & Collect</h1>
+<p>Build your skincare routine and catch the G to unlock your reward.</p>
+
+<div id="score">Score: 0 | Level: 1</div>
+
+<div id="basket"></div>
+
+<div id="gameArea">
+  <div id="cart"></div>
+</div>
+
+<div id="controls">
+  <button onclick="downloadGiftCard()">Download Gift Card</button>
+  <button onclick="location.reload()">Replay</button>
+</div>
+
+<div id="giftCard">
+  <div class="logoG">GLOSSIER</div>
+  <h2>Game Gift Card </h2>
+  <p>Send gift card to our offices to claim any product you like!</p>
+</div>
+
+<script>
+const products = [
+  {img:"Hydrating Serum.jpg", points:2},
+  {img:"Gentle Cleanser.jpg", points:1},
+  {img:"Revitalizing Cream.jpg", points:3},
+  {img:"oh4.jpg", points:2}
+];
+
+const mysteryBoxImg = "shop bag.jpg";
+
+let score = 0;
+let level = 1;
+let gameOver = false;
+let collected = new Set();
+
+const gameArea = document.getElementById("gameArea");
+const cart = document.getElementById("cart");
+const basket = document.getElementById("basket");
+const scoreText = document.getElementById("score");
+const controls = document.getElementById("controls");
+
+function moveCart(x){
+  const rect = gameArea.getBoundingClientRect();
+  let pos = x - rect.left - 45;
+  if(pos < 0) pos = 0;
+  if(pos > rect.width - 95) pos = rect.width - 95;
+  cart.style.left = pos + "px";
+}
+
+document.addEventListener("mousemove",e=>moveCart(e.clientX));
+document.addEventListener("touchmove",e=>moveCart(e.touches[0].clientX));
+
+function updateLevel(){
+  level = Math.floor(score/5)+1;
+  scoreText.innerHTML = `Score: ${score} | Level: ${level}`;
+}
+
+function createItem(){
+  if(gameOver) return;
+
+  const item = document.createElement("div");
+  item.className = "item";
+
+  const bad = Math.random() < 0.18;
+  const special = Math.random() < 0.05;
+
+  if(special){
+    item.innerHTML = `<span class="specialG">G</span>`;
+    item.dataset.special = "true";
+  } else if(bad){
+    item.innerHTML = `<img src="${mysteryBoxImg}" class="mysteryBox">`;
+    item.dataset.bad = "true";
+  } else {
+    const p = products[Math.floor(Math.random()*products.length)];
+    item.innerHTML = `<img src="${p.img}" width="65" height="65">`;
+    item.dataset.points = p.points;
+    item.dataset.img = p.img;
+  }
+
+  let x = Math.random() * (gameArea.clientWidth - 70);
+  let y = 0;
+  const speed = 3 + level;
+
+  item.style.left = x + "px";
+  item.style.top = y + "px";
+  gameArea.appendChild(item);
+
+  const fall = setInterval(()=>{
+    if(gameOver){
+      clearInterval(fall);
+      item.remove();
+      return;
+    }
+
+    y += speed;
+    item.style.top = y + "px";
+
+    const cartRect = cart.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    const hit =
+      itemRect.bottom >= cartRect.top &&
+      itemRect.left < cartRect.right &&
+      itemRect.right > cartRect.left;
+
+    if(hit){
+      clearInterval(fall);
+      item.remove();
+
+      if(item.dataset.bad){
+        endGame("Try again");
+        return;
+      }
+
+      if(item.dataset.special){
+        endGame("Reward unlocked");
+        return;
+      }
+
+      score += Number(item.dataset.points || 1);
+      updateLevel();
+
+      if(!collected.has(item.dataset.img)){
+        collected.add(item.dataset.img);
+        const img = document.createElement("img");
+        img.src = item.dataset.img;
+        img.className = "basket-item";
+        basket.appendChild(img);
+      }
+    }
+
+    if(y > gameArea.clientHeight){
+      clearInterval(fall);
+      item.remove();
+    }
+  },20);
+}
+
+setInterval(createItem,800);
+
+function endGame(text){
+  gameOver = true;
+  gameArea.innerHTML += `<div id="winMessage">${text}</div>`;
+  controls.style.display = "flex";
+}
+
+function downloadGiftCard(){
+  const card = document.getElementById("giftCard");
+  card.style.display = "block";
+
+  html2canvas(card).then(canvas=>{
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "Lumivella-Gift-Card.png";
+    link.click();
+    card.style.display = "none";
+  });
+}
+</script>
+
+</body>
+</html>
